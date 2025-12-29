@@ -35,6 +35,10 @@ coverage/
 # Firebase generated files
 lib/firebase_options.dart
 
+# Firebase files (sensitive)
+android/app/google-services.json
+firebase.json
+
 # Symbolication / Obfuscation
 app.*.symbols
 app.*.map.json
