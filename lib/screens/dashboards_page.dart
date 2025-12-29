@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/dashboard.dart';
 import 'dashboard_page.dart';
+import 'dashboards_management_page.dart'; // <- new import
 
 class DashboardsPage extends StatefulWidget {
   const DashboardsPage({super.key});
@@ -56,7 +57,16 @@ class _DashboardsPageState extends State<DashboardsPage> {
       MaterialPageRoute(
         builder: (context) => DashboardPage(dashboard: dashboard),
       ),
-    ).then((_) => setState(() {}));
+    ).then((_) => setState(() {})); // refresh after returning
+  }
+
+  void _openManageDashboards() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => DashboardsManagementPage(dashboards: dashboards),
+      ),
+    ).then((_) => setState(() {})); // refresh after returning
   }
 
   @override
@@ -65,6 +75,13 @@ class _DashboardsPageState extends State<DashboardsPage> {
       appBar: AppBar(
         title: const Text("NestTrack Dashboards"),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: "Manage Dashboards",
+            onPressed: _openManageDashboards,
+          ),
+        ],
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(16),

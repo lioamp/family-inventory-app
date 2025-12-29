@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../models/dashboard.dart';
 import '../models/inventory_item.dart';
 import '../widgets/inventory_card.dart';
+import 'dashboard_management_page.dart'; // make sure this import exists
 
 class DashboardPage extends StatefulWidget {
   final Dashboard dashboard;
@@ -277,6 +278,21 @@ class _DashboardPageState extends State<DashboardPage> {
       appBar: AppBar(
         title: Text(widget.dashboard.name),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: "Manage Dashboard",
+            onPressed: () async {
+              await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => DashboardManagementPage(dashboard: widget.dashboard),
+                ),
+              );
+              setState(() {}); // <-- rebuild after returning
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [
